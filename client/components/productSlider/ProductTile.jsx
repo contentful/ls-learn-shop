@@ -52,8 +52,8 @@ const ProductTile = ({ product }) => {
     <div>
       <Link href={`/products/${slug || productHandle}`}>
         <div
-          itemscope
-          itemtype="https://schema.org/Product"
+          itemScope
+          itemType={"https://schema.org/Product"}
           className="flex w-full flex-col space-y-4 max-w-fit"
         >
           {/* <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} /> */}
@@ -64,10 +64,10 @@ const ProductTile = ({ product }) => {
           </div>
           <div className="flex flex-col w-60">
             <div className="flex flex-col space-y-2">
-              <h4 itemprop="name" className="font-bold text-lgx  ">
+              <h4 itemProp={"name"} className="font-bold text-lgx  ">
                 {productName}
               </h4>
-              <span itemprop="price" className=" text-base text-blau">
+              <span itemProp={"price"} className=" text-base text-blau">
                 {productFormattedPrice}
               </span>
             </div>

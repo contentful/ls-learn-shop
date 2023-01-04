@@ -38,7 +38,7 @@ const MediaWrapper = (props) => {
           <div className="rounded-lg   max-w-sm h-full ">
             {/* <img className={`${classes} `} src={`https:${assetUrl}`} alt="" /> */}
             <Image
-              itemprop="image"
+              itemProp="image"
               className={`${classes} `}
               src={`https:${assetUrl}`}
               alt={altText}
