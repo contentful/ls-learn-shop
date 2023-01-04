@@ -67,12 +67,19 @@ const ProductTile = ({ product }) => {
               <h4 itemProp={"name"} className="font-bold text-lgx  ">
                 {productName}
               </h4>
+
+              <span itemProp={"sku"} content={productHandle}></span>
               <div
                 itemProp={"offers"}
                 itemScope
                 itemType={"https://schema.org/Offer"}
               >
-                <span itemProp={"price"} className=" text-base text-blau">
+                <span itemProp={"priceCurrency"} content="USD"></span>
+                <span
+                  itemProp={"price"}
+                  content={productPrice}
+                  className=" text-base text-blau"
+                >
                   {productFormattedPrice}
                 </span>
               </div>
