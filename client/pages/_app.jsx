@@ -4,6 +4,7 @@ import "keen-slider/keen-slider.min.css";
 import "../styles/globals.css";
 import dynamic from "next/dynamic";
 import _ from "lodash";
+import ErrorBoundary from "../components/shared/ErrorBoundary";
 
 const MainLayout = dynamic(() => import("../layouts/MainLayout"), {
   ssr: false,
@@ -23,9 +24,11 @@ function MyApp(props) {
 
   return (
     <AppContextProvider>
-      <MainLayout preview={preview}>
-        <Component {...pageProps} />
-      </MainLayout>{" "}
+      <ErrorBoundary>
+        <MainLayout preview={preview}>
+          <Component {...pageProps} />
+        </MainLayout>
+      </ErrorBoundary>
     </AppContextProvider>
   );
 }

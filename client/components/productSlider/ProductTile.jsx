@@ -8,7 +8,77 @@ import {
   getShopifyProductByGid,
 } from "../../lib/product/helpers";
 
-function ProductTile(product) {
+const ProductTile = ({ product }) => {
+  const id = product?.sys?.id;
+  const slug = product?.fields?.slug;
+  const gid = product?.fields?.gid;
+  const images = product?.fields?.images;
+
+  const [productDetail, setProductDetail] = useState(""); //from e-commerce platform
+
+  useEffect(() => {
+    (async () => {
+      if (!slug) {
+        return;
+      }
+      try {
+        let productDetailFromCommercePlatform;
+        if (gid) {
+          productDetailFromCommercePlatform = await getShopifyProductByGid(gid);
+        } else {
+          productDetailFromCommercePlatform = await getShopifyProductByHandle(
+            slug
+          );
+        }
+        setProductDetail(productDetailFromCommercePlatform);
+      } catch (error) {
+        console.log("productDetailFromCommercePlatform error", error);
+      }
+    })();
+    return () => {};
+  }, [slug]);
+
+  const productName = get(productDetail, "name");
+  const productHandle = get(productDetail, "slug");
+  const productSku = get(productDetail, "sku");
+  const productPrice = get(productDetail, "price");
+  const productFormattedPrice = get(productDetail, "formated_price");
+  const productReviews = get(productDetail, "reviews");
+  const productInStock = get(productDetail, "in_stock");
+  const productAltShortDescription = get(productDetail, "short_description");
+  const descriptionHtml = get(productDetail, "descriptionHtml");
+
+  return (
+    <div>
+      <Link href={`/products/${slug || productHandle}`}>
+        <div
+          itemscope
+          itemtype="https://schema.org/Product"
+          className="flex w-full flex-col space-y-4 max-w-fit"
+        >
+          {/* <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} /> */}
+          <div className=" w-52 h-52 md:h-56 md:w-56 lg:h-64 lg:w-64  flex flex-row items-center justify-items-center  border-2 rounded-lg">
+            <div className="hover:scale-125 trasition-all  ease-in-out delay-300 delay-200x">
+              <MediaWrapper {...images[0]} />
+            </div>
+          </div>
+          <div className="flex flex-col w-60">
+            <div className="flex flex-col space-y-2">
+              <h4 itemprop="name" className="font-bold text-lgx  ">
+                {productName}
+              </h4>
+              <span itemprop="price" className=" text-base text-blau">
+                {productFormattedPrice}
+              </span>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+};
+
+function ProductTile2(product) {
   const id = get(product, "sys.id");
   const slug = get(product, "fields.slug");
 
@@ -37,15 +107,14 @@ function ProductTile(product) {
     }
     let productDetailFromCommercePlatform;
     try {
-      if (gid) {
-        productDetailFromCommercePlatform = await getShopifyProductByGid(gid);
-      } else {
-        productDetailFromCommercePlatform = await getShopifyProductByHandle(
-          slug
-        );
-      }
-
-      setProductDetail(productDetailFromCommercePlatform);
+      // if (gid) {
+      //   productDetailFromCommercePlatform = await getShopifyProductByGid(gid);
+      // } else {
+      //   productDetailFromCommercePlatform = await getShopifyProductByHandle(
+      //     slug
+      //   );
+      // }
+      // setProductDetail(productDetailFromCommercePlatform);
     } catch (error) {
       console.log("productDetailFromCommercePlatform error", error);
     }
@@ -57,26 +126,25 @@ function ProductTile(product) {
     return "";
   }
 
+  return "test";
   return (
     <Link href={`/products/${slug || productHandle}`}>
-      <a>
-        <div className="flex w-full flex-col space-y-4 max-w-fit">
-          {/* <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} /> */}
-          <div className=" w-52 h-52 md:h-56 md:w-56 lg:h-64 lg:w-64  flex flex-row items-center justify-items-center  border-2 rounded-lg">
-            <div className="hover:scale-125 trasition-all  ease-in-out delay-300 delay-200x">
-              <MediaWrapper {...images[0]} />
-            </div>
-          </div>
-          <div className="flex flex-col w-60">
-            <div className="flex flex-col space-y-2">
-              <h4 className="font-bold text-lgx  ">{productName}</h4>
-              <span className=" text-base text-blau">
-                {productFormattedPrice}
-              </span>
-            </div>
+      <div className="flex w-full flex-col space-y-4 max-w-fit">
+        {/* <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} /> */}
+        <div className=" w-52 h-52 md:h-56 md:w-56 lg:h-64 lg:w-64  flex flex-row items-center justify-items-center  border-2 rounded-lg">
+          <div className="hover:scale-125 trasition-all  ease-in-out delay-300 delay-200x">
+            <MediaWrapper {...images[0]} />
           </div>
         </div>
-      </a>
+        <div className="flex flex-col w-60">
+          <div className="flex flex-col space-y-2">
+            <h4 className="font-bold text-lgx  ">{productName}</h4>
+            <span className=" text-base text-blau">
+              {productFormattedPrice}
+            </span>
+          </div>
+        </div>
+      </div>
     </Link>
   );
 }

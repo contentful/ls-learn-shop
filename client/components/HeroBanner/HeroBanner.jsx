@@ -32,17 +32,18 @@ export default function HeroBanner(entry) {
     <>
       <div className="relative min-w-full bg-blau h-full lg:h-[550px] p-8 md:p-20 flex flex-row aspect-video">
         <Image
-          style={{ height: MINIMUM_HERO_HEIGHT }}
+          // style={{ height: MINIMUM_HERO_HEIGHT }}
           className={`z-0 `}
           height={imageFields.height || "100%"}
           width={imageFields.width || "100%"}
           src={`${imageFields.url}?fm=webp`}
           alt={``}
-          layout="fill"
-          objectFit="cover"
-          objectPosition={"center"}
+          // layout="fill"
+          // objectFit="cover"
+          // objectPosition={"center"}
           quality={80}
           priority={true}
+          style={{ objectFit: "cover", height: MINIMUM_HERO_HEIGHT }}
         />
         <div className="z-10 relative w-full lg:w-1/2 text-whitex  bg-opacity-90 bg-white  rounded-xl flex flex-col space-y-2 justify-items-center items-center justify-evenly text-center shadow-lg p-8">
           <h2 className="font-bold text-4xl">{headline}</h2>
@@ -50,11 +51,9 @@ export default function HeroBanner(entry) {
           <p className="">{subline}</p>
 
           <Link href={"/"}>
-            <a>
-              <div className="bg-blaux bg-red-500 shadow-lg px-4 p-2 rounded-xl text-white">
-                {ctaText}
-              </div>
-            </a>
+            <div className="bg-blaux bg-red-500 shadow-lg px-4 p-2 rounded-xl text-white">
+              {ctaText}
+            </div>
           </Link>
         </div>
       </div>

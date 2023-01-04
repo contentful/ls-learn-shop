@@ -40,11 +40,9 @@ function SplitScreen(entry) {
 
             {ctaTarget ? (
               <Link href={`${ctaTarget}`}>
-                <a>
-                  <span className="p-2 bg-blau text-white rounded-lg shadow-lg animate-bounce">
-                    {ctaText}
-                  </span>
-                </a>
+                <span className="p-2 bg-blau text-white rounded-lg shadow-lg animate-bounce">
+                  {ctaText}
+                </span>
               </Link>
             ) : (
               ""
@@ -73,11 +71,9 @@ function SplitScreen(entry) {
           <p className="">{subline}</p>
           <div className="p-6">
             <Link href={`${ctaTarget}`}>
-              <a>
-                <span className="p-2 bg-blau text-white rounded-lg shadow-lg animate-bounce">
-                  {ctaText}
-                </span>
-              </a>
+              <span className="p-2 bg-blau text-white rounded-lg shadow-lg animate-bounce">
+                {ctaText}
+              </span>
             </Link>
           </div>
         </div>

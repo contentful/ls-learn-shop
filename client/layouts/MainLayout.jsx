@@ -69,9 +69,7 @@ const MainLayout = (props) => {
   return (
     <>
       <div className="mt-4x  bg-opacity-90 bg-blau4 top-0 z-50 w-full lg:fixed text-white flex flex-col space-y-2 md:space-y-0 md:flex-row justify-between p-4 border-b-2">
-        <Link href="/">
-          <a className=" cursor-pointer">Home</a>
-        </Link>
+        <Link href="/">Home</Link>
 
         <div className="flex flex-row space-x-2">
           {preview ? (

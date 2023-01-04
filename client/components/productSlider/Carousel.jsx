@@ -34,6 +34,10 @@ function Carousel(props) {
     ]
   );
 
+  if (items.length < 1) {
+    return "";
+  }
+
   return (
     <Spacing>
       <div className="flex flex-col space-y-4">
@@ -86,10 +90,10 @@ function Carousel(props) {
               >
                 <div className="w-full  ">
                   <ProductTile
-                    index={id}
+                    // index={id}
                     slideIndex={slideIndex}
-                    key={id}
-                    {...prd}
+                    // key={id}
+                    product={prd}
                   />
                 </div>
               </div>
