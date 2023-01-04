@@ -30,7 +30,7 @@ export default function HeroBanner(entry) {
 
   return (
     <>
-      <div className="relative min-w-full bg-blau h-full lg:h-[550px] p-8 md:p-20 flex flex-row aspect-video">
+      <div className="relative min-w-full bg-blau h-full lg:h-[650px] p-8 md:p-20 flex flex-col lg:flex-row aspect-video">
         <Image
           // style={{ height: MINIMUM_HERO_HEIGHT }}
           className={`z-0 `}
@@ -38,12 +38,14 @@ export default function HeroBanner(entry) {
           width={imageFields.width || "100%"}
           src={`${imageFields.url}?fm=webp`}
           alt={``}
-          // layout="fill"
-          // objectFit="cover"
-          // objectPosition={"center"}
+          sizes="100vw"
           quality={80}
           priority={true}
-          style={{ objectFit: "cover", height: MINIMUM_HERO_HEIGHT }}
+          style={{
+            objectFit: "cover",
+            height: "auto",
+            width: "100%",
+          }}
         />
         <div className="z-10 relative w-full lg:w-1/2 text-whitex  bg-opacity-90 bg-white  rounded-xl flex flex-col space-y-2 justify-items-center items-center justify-evenly text-center shadow-lg p-8">
           <h2 className="font-bold text-4xl">{headline}</h2>
