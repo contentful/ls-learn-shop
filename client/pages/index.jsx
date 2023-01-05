@@ -5,13 +5,19 @@ import useSWR from "swr";
 import { FlexibleFieldResolver } from "../components/FlexibleFieldResolver";
 import Head from "next/head";
 
+import MainLayout from "@layouts/MainLayout";
+
 import { getEntriesByContentType } from "../lib/helpers";
+
+// const MainLayout = dynamic(() => import("@layouts/MainLayout"), {
+//   ssr: false,
+// });
 
 const LANDINPAGE_CONTENT_TYPE_NAME = "landingPage";
 
 const Xray = dynamic(() => import("../components/Xray"), { ssr: false });
 
-export default function Home(props) {
+const Home = (props) => {
   const router = useRouter(); //https://nextjs.org/docs/api-reference/next/router#userouter
 
   const { locale, locales, defaultLocale } = router; // locale data from next js router
@@ -39,18 +45,33 @@ export default function Home(props) {
     : get(page, "sys.type");
   const entryTitle = headline ? headline : get(page, "fields.internalName");
 
+  const seoTitle = initialPage?.fields?.seo?.fields?.title;
+  const seoDescription = initialPage?.fields?.seo?.fields?.description;
+  const seoOgImage =
+    initialPage?.fields?.seo?.fields?.ogImage?.fields?.file?.url;
+
+  const seoTwitterCardStyle =
+    initialPage?.fields?.seo?.fields?.twitterCardStyle || "summary_large_image";
+
   return (
     <>
       <Head>
-        <title>{entryTitle}</title>
-        <meta name="description" content={entryTitle} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        {seoOgImage && (
+          <meta property="og:image" content={`https:${seoOgImage}`} />
+        )}
+
+        <meta property="twitter:card" content={seoTwitterCardStyle} />
       </Head>
+      {/* {JSON.stringify(seoOgImage)} */}
+      {seoTwitterCardStyle}
       <Xray contentType={contentType} entryId={entryId} entryTitle={entryTitle}>
         <FlexibleFieldResolver field={sections} />
       </Xray>
     </>
   );
-}
+};
 
 export async function getStaticProps(context) {
   const locales = get(context, "locales");
@@ -94,3 +115,9 @@ const fetcher = async ({ contentType, locale, preview = false }) => {
   let homepageEntry = get(pageEntries, "items[0]");
   return homepageEntry;
 };
+
+Home.getLayout = (page) => {
+  return <MainLayout>{page}</MainLayout>;
+};
+
+export default Home;

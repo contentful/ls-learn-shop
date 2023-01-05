@@ -25,17 +25,4 @@ const AppContextProvider = ({ children }) => {
   );
 };
 
-// export function AppWrapper({ children }) {
-//   const [xrayMode, setXrayMode] = useState(false);
-//   const [sharedState, setSharedState] = useState({ xrayMode: false });
-
-//   return (
-//     <AppContext.Provider value={sharedState}>{children} </AppContext.Provider>
-//   );
-// }
-
 export { AppContextProvider, useSharedState };
-
-// export function useAppContext() {
-//   return useContext(AppContext);
-// }

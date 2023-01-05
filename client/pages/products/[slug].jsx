@@ -20,6 +20,7 @@ import ImageComponent from "../../components/ImageComponent";
 import ImageGallery from "../../components/ImageGallery";
 import StarRating from "../../components/StarRating.jsx";
 import richtextRenderOptions from "../../lib/richtextRenderOptions";
+import MainLayout from "@layouts/MainLayout";
 
 const Xray = dynamic(() => import("../../components/Xray.jsx"), { ssr: false });
 
@@ -232,4 +233,7 @@ const fetcher = async ({ contentType, locale, slug, preview = false }) => {
   return homepageEntry;
 };
 
+ProductPage.getLayout = (page) => {
+  return <MainLayout>{page}</MainLayout>;
+};
 export default ProductPage;

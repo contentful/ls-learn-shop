@@ -1,8 +1,11 @@
 import React from "react";
+import dynamic from "next/dynamic";
 
-function index() {
+import MainLayout from "@layouts/MainLayout";
+
+const Page = () => {
   return <div>product list/catalogue </div>;
-}
+};
 export const getStaticProps = ({ locale, locales }) => {
   return {
     props: {
@@ -12,4 +15,8 @@ export const getStaticProps = ({ locale, locales }) => {
   };
 };
 
-export default index;
+Page.getLayout = (page) => {
+  return <MainLayout>{page}</MainLayout>;
+};
+
+export default Page;
