@@ -12,7 +12,7 @@
         "@contentful/f36-components": "^4.9.0",
         "@contentful/rich-text-react-renderer": "^15.11.1",
         "@contentful/rich-text-types": "^15.12.1",
-        "@shopify/shopify-api": "^3.1.0",
+        "@shopify/shopify-api": "^6.0.2",
         "axios": "^0.27.2",
         "contentful": "^9.1.5",
         "contentful-migration": "^4.9.0",
