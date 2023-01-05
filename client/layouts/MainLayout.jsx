@@ -39,7 +39,8 @@ const MainLayout = (props) => {
   const xrayMode = _.get(sharedContext, "xrayMode");
   const [selectLocale, setSelectLocale] = useState("");
 
-  const preview = _.get(props, "preview");
+  // const preview = _.get(props, "preview");
+  const preview = props?.children?.props?.preview;
 
   useEffect(() => {
     setOtherLocales(locales.filter((locale) => locale !== activeLocale));
@@ -86,7 +87,6 @@ const MainLayout = (props) => {
           ) : (
             ""
           )}
-
           <div className="">
             <LocaleSelector
               id={"nav-top-selector"}
@@ -95,7 +95,6 @@ const MainLayout = (props) => {
               changeLocale={changeLocale}
             />
           </div>
-
           <div className="bg-white p-2 rounded-lg shadow-lg ">
             <Switch
               name="toggle-xray-mode"
