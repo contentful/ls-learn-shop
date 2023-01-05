@@ -65,7 +65,7 @@ const Home = (props) => {
         <meta property="twitter:card" content={seoTwitterCardStyle} />
       </Head>
       {/* {JSON.stringify(seoOgImage)} */}
-      {seoTwitterCardStyle}
+
       <Xray contentType={contentType} entryId={entryId} entryTitle={entryTitle}>
         <FlexibleFieldResolver field={sections} />
       </Xray>

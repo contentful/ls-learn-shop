@@ -44,6 +44,11 @@ const MediaWrapper = (props) => {
               alt={altText}
               width={assetWidth}
               height={assetHeight}
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
               // layout="fill"
               // objectFit="contain"
             />
